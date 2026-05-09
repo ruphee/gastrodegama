@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kontakt — Gastro de Gama</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.alert{padding:16px 20px;border-radius:var(--r-md);font-size:15px;margin-bottom:24px;display:none}
+.alert.ok{background:rgba(108,198,138,.12);border:1px solid rgba(108,198,138,.35);color:var(--ok)}
+.alert.error{background:rgba(230,106,106,.12);border:1px solid rgba(230,106,106,.35);color:var(--err)}
+.alert.show{display:block}
+/* honeypot */
+.hp-field{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+</style>
+</head>
+<body>
+
+<main class="page">
+
+<nav class="nav">
+  <a class="brand" href="index.html"><span class="logo" aria-hidden="true"><svg viewBox="0 0 28 28" width="28" height="28"><rect width="28" height="28" rx="8" fill="#E07555"/><circle cx="22" cy="6" r="3" fill="#F4A01F"/><text x="13" y="20" text-anchor="middle" font-family="Bricolage Grotesque,system-ui" font-weight="700" font-size="16" fill="#1B1230">G</text></svg></span><span class="wordmark">Gastro <em>de</em> Gama</span></a>
+  <button class="nav-toggle" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')"><span></span><span></span><span></span></button>
+  <ul>
+    <li><a href="uslugi.html">Usługi</a></li>
+    <li><a href="urzadzenia.html">Urządzenia</a></li>
+    <li><a href="marki.html">Marki</a></li>
+    <li><a href="o-nas.html">O nas</a></li>
+    <li><a href="kontakt.html" class="active">Kontakt</a></li>
+  </ul>
+  <a class="btn btn-primary btn-sm" href="tel:+48573826426">+48 573 826 426</a>
+</nav>
+
+<div class="page-head">
+  <div>
+    <div class="crumb"><a href="index.html">Strona główna</a> <span>›</span> <span>Kontakt</span></div>
+    <span class="eyebrow">Kontakt</span>
+    <h1 class="h1" style="margin-top:14px">Zadzwoń, napisz<br/>albo zostaw <span class="kw">zgłoszenie</span>.</h1>
+  </div>
+  <p class="lead">Najszybciej dotrzemy z&nbsp;odpowiedzią telefonicznie. Jeśli problem może chwilę poczekać — wypełnij krótki formularz, oddzwonimy w&nbsp;godzinach pracy.</p>
+</div>
+
+<section class="contact-grid">
+  <div style="display:flex;flex-direction:column;gap:18px">
+    <div class="card high">
+      <div class="mono">TELEFON</div>
+      <div style="font-family:var(--font-display);font-size:32px;font-weight:500;letter-spacing:-.02em;margin-top:6px"><a href="tel:+48573826426">+48 573 826 426</a></div>
+      <p class="muted" style="font-size:14px;margin-top:6px">Dyspozytor czynny pn–pt · 8:00 – 18:00</p>
+    </div>
+    <div class="card high">
+      <div class="mono">E-MAIL</div>
+      <div style="font-family:var(--font-display);font-size:24px;font-weight:500;margin-top:6px"><a href="mailto:mariusz@gastrodegama.pl">mariusz@gastrodegama.pl</a></div>
+      <p class="muted" style="font-size:14px;margin-top:6px">Na maile odpowiadamy zwykle w&nbsp;ciągu 4 godzin.</p>
+    </div>
+    <div class="card high">
+      <div class="mono">ADRES</div>
+      <div style="font-family:var(--font-display);font-size:20px;font-weight:500;margin-top:6px;line-height:1.3">os. Piastów 14<br/>31-623 Kraków</div>
+      <p class="muted" style="font-size:14px;margin-top:6px">Spotkanie w&nbsp;biurze — wyłącznie po wcześniejszym umówieniu.</p>
+    </div>
+    <div class="card high">
+      <div class="mono">DANE FIRMY</div>
+      <div class="mono" style="margin-top:10px;color:var(--fg-2);line-height:1.8">
+        Mariusz Nowak Gastro de Gama<br/>
+        NIP 6782600928<br/>
+        REGON 526930631
+      </div>
+    </div>
+  </div>
+
+  <form class="card" id="contact-form" action="send.php" method="POST" style="display:flex;flex-direction:column;gap:18px;background:var(--bg-2)">
+
+    <!-- Honeypot — nie ruszać -->
+    <div class="hp-field" aria-hidden="true">
+      <label>Nie wypełniaj tego pola</label>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div>
+      <span class="badge cta">Zgłoszenie serwisowe</span>
+      <h2 class="h2" style="margin-top:14px;font-size:32px">Opisz problem.</h2>
+      <p class="muted" style="font-size:14px;margin-top:6px">Im więcej szczegółów (model, objawy, godziny pracy kuchni), tym szybciej oddzwonimy z konkretną propozycją.</p>
+    </div>
+
+    <div id="alert-ok" class="alert ok">✓ Zgłoszenie wysłane! Oddzwonimy w godzinach pracy.</div>
+    <div id="alert-error" class="alert error">✗ Coś poszło nie tak. Zadzwoń na +48 573 826 426 lub napisz bezpośrednio na mariusz@gastrodegama.pl</div>
+
+    <div class="grid grid-2" style="gap:14px">
+      <div class="field"><label>Imię i&nbsp;nazwisko *</label><input name="imie" placeholder="Jan Kowalski" required /></div>
+      <div class="field"><label>Telefon *</label><input name="telefon" placeholder="+48 ___ ___ ___" required /></div>
+    </div>
+    <div class="field"><label>E-mail</label><input name="email" type="email" placeholder="biuro@twoja-restauracja.pl" /></div>
+    <div class="field"><label>Nazwa lokalu / firmy</label><input name="lokal" placeholder="np. Restauracja Pod Wawelem" /></div>
+
+    <div class="grid grid-2" style="gap:14px">
+      <div class="field">
+        <label>Typ zgłoszenia *</label>
+        <select name="typ" required>
+          <option>Awaria — pilne</option>
+          <option>Przegląd okresowy</option>
+          <option>Montaż / instalacja</option>
+          <option>Audyt / doradztwo</option>
+          <option>Inne</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Lokalizacja</label>
+        <select name="lokalizacja">
+          <option>Kraków</option>
+          <option>Wieliczka</option>
+          <option>Niepołomice</option>
+          <option>Skawina</option>
+          <option>Inna (Małopolska)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field"><label>Urządzenie (marka i&nbsp;model)</label><input name="urzadzenie" placeholder="np. Rational iCombi Pro 6-1/1" /></div>
+    <div class="field"><label>Opis problemu *</label><textarea name="opis" rows="4" placeholder="Krótko opisz objawy awarii lub zakres potrzebnej usługi…" required></textarea></div>
+
+    <label style="display:flex;align-items:flex-start;gap:10px;color:var(--fg-3);font-size:13px;line-height:1.5">
+      <input type="checkbox" name="zgoda" required style="margin-top:4px"/> Wyrażam zgodę na przetwarzanie moich danych w&nbsp;celu kontaktu zwrotnego.
+    </label>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+      <span class="mono">Odpowiadamy zwykle w&nbsp;ciągu 4h w&nbsp;godzinach pracy</span>
+      <button class="btn btn-primary btn-lg" type="submit" id="submit-btn">Wyślij zgłoszenie <span class="arrow">→</span></button>
+    </div>
+  </form>
+</section>
+
+<!-- MAPA -->
+<section class="section">
+  <div class="row" style="margin-bottom:24px">
+    <div>
+      <span class="eyebrow">Obszar działania</span>
+      <h2 class="h2" style="margin-top:10px">Kraków + Małopolska, 80&nbsp;km od centrum.</h2>
+    </div>
+  </div>
+  <div style="border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--line);aspect-ratio:21/9;background:var(--bg-3)">
+    <iframe src="https://maps.google.com/maps?q=osiedle+Piast%C3%B3w+14,+31-623+Krak%C3%B3w&z=14&output=embed" width="100%" height="100%" style="border:0;display:block;filter:hue-rotate(220deg) invert(.92) saturate(.6) contrast(.9)" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa — os. Piastów 14, 31-623 Kraków"></iframe>
+  </div>
+  <p class="muted" style="font-size:13px;margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <span class="mono">os. Piastów 14 · 31-623 Kraków</span>
+    <span>·</span>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=osiedle+Piast%C3%B3w+14,+31-623+Krak%C3%B3w" target="_blank" rel="noopener" style="color:var(--cta)">Wyznacz trasę w Google Maps →</a>
+  </p>
+</section>
+
+<footer class="site">
+  <div class="top">
+    <div><div class="brand" style="display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:20px;font-weight:600"><span class="logo" aria-hidden="true" style="width:32px;height:32px"><svg viewBox="0 0 32 32" width="32" height="32"><rect width="32" height="32" rx="9" fill="#E07555"/><circle cx="25" cy="7" r="3.4" fill="#F4A01F"/><text x="14.5" y="23" text-anchor="middle" font-family="Bricolage Grotesque,system-ui" font-weight="700" font-size="18" fill="#1B1230">G</text></svg></span>Gastro <em>de</em> Gama</div><p class="muted" style="font-size:14px;margin-top:14px;max-width:36ch">Serwis i montaż urządzeń gastronomicznych. Kraków + Małopolska.</p></div>
+    <div><h4>Usługi</h4><ul><li><a href="uslugi-serwis.html">Serwis i przeglądy</a></li><li><a href="uslugi.html">Montaż i instalacja</a></li><li><a href="uslugi.html">Naprawy awaryjne</a></li></ul></div>
+    <div><h4>Firma</h4><ul><li><a href="o-nas.html">O nas</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div><h4>Kontakt</h4><ul><li><a href="tel:+48573826426">+48 573 826 426</a></li><li><a href="mailto:mariusz@gastrodegama.pl">mariusz@gastrodegama.pl</a></li><li>pn–pt · 8:00–18:00</li></ul></div>
+  </div>
+  <div class="bottom"><span>© 2026 Gastro de Gama</span><span><a href="#">Polityka prywatności</a> · <a href="#">Cookies</a></span></div>
+</footer>
+
+</main>
+
+<script>
+// Pokaż komunikat na podstawie ?status= w URL
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
+  if (status === 'ok') {
+    document.getElementById('alert-ok').classList.add('show');
+    // Przewiń do formularza
+    document.getElementById('contact-form').scrollIntoView({behavior:'smooth', block:'start'});
+    // Wyczyść URL
+    history.replaceState(null, '', 'kontakt.html');
+  } else if (status === 'error') {
+    document.getElementById('alert-error').classList.add('show');
+    document.getElementById('contact-form').scrollIntoView({behavior:'smooth', block:'start'});
+    history.replaceState(null, '', 'kontakt.html');
+  }
+})();
+
+// Blokuj podwójne wysyłanie
+document.getElementById('contact-form').addEventListener('submit', function() {
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Wysyłanie…';
+});
+</script>
+</body>
+</html>
